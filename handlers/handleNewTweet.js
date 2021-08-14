@@ -1,6 +1,5 @@
 const sendWOTD = require("./sendWOTD");
 const twitterClient = require("../loaders/twitterClient");
-const redisClient = require("../loaders/redisClient");
 
 module.exports = async (tweetID) => {
   const tweet = await twitterClient.v2.singleTweet(tweetID, {
