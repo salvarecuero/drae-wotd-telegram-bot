@@ -45,9 +45,6 @@ const connectToTwitter = async () => {
       ETwitterStreamEvent.DataKeepAlive,
       () => console.log("Twitter has a keep-alive packet.")
     ); */
-
-    stream.autoReconnect(true);
-    stream.autoReconnectRetries(14);
   } catch (e) {
     // e is either a TwitterApiRequestError or a TwitterApiError
     if (e.type === ETwitterApiError.Request) {

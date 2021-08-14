@@ -1,7 +1,9 @@
 const bot = require("../loaders/telegramBot");
 const chatsIDs = require("../loaders/chatsIDs");
 
-module.exports = (text, media) => {
+const defaultMsg = "#PalabraDelDía de la RAE será enviada diariamente.";
+
+module.exports = (text = defaultMsg, media) => {
   chatsIDs.value.forEach((chatID) => {
     if (media) {
       bot.sendPhoto(chatID, media, {
