@@ -14,6 +14,6 @@ const url = process.env.APP_URL;
 
 const bot = new TelegramBot(telegramToken, options);
 
-if (process.env.PORT) bot.setWebHook(`${url}/bot${token}`);
+if (process.env.PORT) bot.setWebHook(`${url}/bot${telegramToken}`);
 
 module.exports = bot;
