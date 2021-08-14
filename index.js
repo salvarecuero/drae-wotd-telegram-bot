@@ -18,7 +18,7 @@ bot.onText(/^\/(start|suscribirse|subscribe)/, function (msg) {
   bot.sendMessage(
     chatID,
     `Intentaré enviar la "Palabra del día" de la RAE cada día. También puedes agregarme a un grupo si así lo deseas.
-    Puedes desuscribirte enviando /desuscribirme o /unsubscribe.`
+    Puedes desuscribirte enviando /desuscribirse o /unsubscribe.`
   );
 });
 
