@@ -4,7 +4,7 @@ const chatsIDs = require("../loaders/chatsIDs");
 const removeChatFromDB = async (chatID) => {
   await redisClient
     .sremAsync("DRAE-WOTD-ChatsIDs", chatID)
-    .then(() => console.log(`New user added to DB: ${chatID}`))
+    .then(() => console.log(`Chat deleted from DB: ${chatID}`))
     .then(() => chatsIDs.update());
 };
 
