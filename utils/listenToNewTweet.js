@@ -2,10 +2,15 @@ require("dotenv").config();
 const twitterClient = require("../loaders/twitterClient");
 const { ETwitterStreamEvent, ETwitterApiError } = require("twitter-api-v2");
 const handleNewTweet = require("../handlers/handleNewTweet");
+const bot = require("../loaders/telegramBot");
+const userToNotify = process.env.TELEGRAM_USER_TO_NOTIFY;
 
 const connectToTwitter = async () => {
   try {
     const stream = await twitterClient.v2.searchStream();
+
+    stream.autoReconnect(true);
+    stream.autoReconnectRetries(14);
 
     stream.on(
       // Emitted when a Twitter payload (a tweet or not, given the endpoint).
@@ -28,6 +33,16 @@ const connectToTwitter = async () => {
       () => console.log("Connection has been closed.")
     );
 
+    stream.on(
+      // Emitted when Node.js {response} is closed by remote or using .close().
+      ETwitterStreamEvent.ReconnectLimitExceeded,
+      () => {
+        const msg = "Reconnect has exceeded its limit.";
+        console.log(msg);
+        bot.sendMessage(userToNotify, msg);
+      }
+    );
+
     /* stream.on(
       // Emitted when a Twitter sent a signal to maintain connection active
       ETwitterStreamEvent.DataKeepAlive,
@@ -48,7 +63,7 @@ const connectToTwitter = async () => {
       );
     }
 
-    setTimeout(connectToTwitter, 10000);
+    setTimeout(connectToTwitter, 120000);
   }
 };
 
