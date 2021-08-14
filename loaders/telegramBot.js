@@ -10,7 +10,10 @@ const options = process.env.PORT
   : {
       polling: true,
     };
+const url = process.env.APP_URL;
 
 const bot = new TelegramBot(telegramToken, options);
+
+if (process.env.PORT) bot.setWebHook(`${url}/bot${token}`);
 
 module.exports = bot;
