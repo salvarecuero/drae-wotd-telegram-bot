@@ -12,22 +12,22 @@ const telegramID = process.env.TELEGRAM_BOT_ID;
 listenToNewTweet();
 
 // Bot response to certain commands or messages.
-bot.onText(/^\/start/, function (msg) {
+bot.onText(/^\/(start|suscribirse|subscribe)/, function (msg) {
   const chatID = msg.chat.id;
   addChatToDB(chatID);
   bot.sendMessage(
     chatID,
     `Intentaré enviar la "Palabra del día" de la RAE cada día. También puedes agregarme a un grupo si así lo deseas.
-    Puedes desubscribirte enviando /unsubscribe.`
+    Puedes desuscribirte enviando /desuscribirme o /unsubscribe.`
   );
 });
 
-bot.onText(/^\/unsubscribe/, function (msg) {
+bot.onText(/^\/(desuscribirse|unsubscribe)/, function (msg) {
   const chatID = msg.chat.id;
   removeChatFromDB(chatID);
   bot.sendMessage(
     chatID,
-    `Has sido desubscripto. Puedes volver a subscribirte enviando /start.`
+    `Has sido desuscripto. Puedes volver a subscribirte enviando /start o /suscribirse.`
   );
 });
 
