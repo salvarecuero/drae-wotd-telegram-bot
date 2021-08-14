@@ -12,5 +12,5 @@ module.exports = async (tweetID) => {
     tweet.data.text.lastIndexOf("https")
   );
 
-  sendWOTD(tweet.data.text, tweet.includes.media[0].url);
+  sendWOTD(tweet.data.text, tweet.includes?.media[0]?.url);
 };
